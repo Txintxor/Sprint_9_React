@@ -30,15 +30,14 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-body {
+/* body { */
  	/* background-image: url(./img/background.jpg);
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-attachment: fixed; */
-	line-height: 1;
-}
+/* } */
 
 ol, ul {
 	list-style: none;
@@ -59,9 +58,37 @@ table {
 	border-spacing: 0;
 }
 
-a {
+a,
+button {
 	text-decoration: none;
 	color: inherit;
-	margin: 0 1rem;
+	cursor: pointer;
+}
+
+button {
+	background: transparent;
+	border: none;
+	font: inherit;
+}
+
+
+/* //Variables// */
+
+:root {
+	--main-color : blue;
+	--second-color: yellow;
+	--border-color : red;
+	--bar-color : rgb(78, 72, 72);
+	--font-color: black;
+	--second-font-color: white;
+
+}
+
+#contentContainer {
+	margin-top: 5rem;
+}
+
+#navLogo {
+	margin-left: 1rem;
 }
 
