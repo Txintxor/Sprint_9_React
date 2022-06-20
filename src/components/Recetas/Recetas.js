@@ -1,7 +1,5 @@
-const Recetas = () => {
-  return ( 
-    <div><h1>Recetas</h1></div>
-    );
+const VisorRecetas = () => {
+  return ( <div>Visor Recetas</div>  );
 }
  
-export default Recetas;
+export default VisorRecetas;
