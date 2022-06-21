@@ -1,7 +1,9 @@
 const Page404 = () => {
   return (
-    <div>404</div>
-    );
-}
- 
+    <main className="mainContainer">
+      <div>404</div>
+    </main>
+  );
+};
+
 export default Page404;

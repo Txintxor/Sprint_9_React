@@ -1,19 +1,13 @@
 import { Card, HomeContent } from "../styled-c/styled-components";
 
-const Home = () => {
+const Produccion = () => {
   return (
     <main className="mainContainer">
       <HomeContent>
-        <Card href="/Ficha">
-          <p>Crea ficha técnica</p>
-        </Card>
-        <Card href="/Recetas">
-          <p>Indice de recetas</p>
-        </Card>
-        <Card href="/EscEvento">
+        <Card href="/ProdEvento">
           <p>Crea lista de producción para eventos</p>
         </Card>
-        <Card href="/EscPartida">
+        <Card href="/ProdPartida">
           <p>Crea lista de producción para partida</p>
         </Card>
       </HomeContent>
@@ -21,4 +15,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Produccion;

@@ -47,21 +47,6 @@ const NavLinks = styled.ul`
   }
 `;
 
-// const NavLinksMini = styled.ul`
-//   display: flex;
-//   justify-content: space-between;
-//   margin-right: 1rem;
-//   flex-direction: column;
-//   position: absolute;
-//   right: -30px;
-//   top: 50px;
-//   background-color: ${barBack};
-//   border: 2px solid ${second};
-//   border-radius: 0 0 4px 4px;
-//   border-top: none;
-//   padding: 0.25rem;
-// `;
-
 const Listed = styled.li`
   padding: 0 1rem;
 `;
@@ -80,7 +65,6 @@ const NavMenuIcon = styled.a`
 const HomeContent = styled.article`
   display: flex;
   flex-direction: column;
-  margin-top: 5rem;
   max-width: 1200px;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
@@ -99,12 +83,26 @@ const Card = styled.a`
   padding: 1rem;
 `;
 
+
+//Componente Ficha
+
+const InputContainer = styled.section`
+display: flex;
+flex-direction: column;
+`;
+
+const InputField = styled.input`
+width : 15rem;
+padding: 0.25rem;
+margin-bottom: 1rem;
+border
+`;
 //Componentes genéricos
 const Button = styled.a`
-  width: fit-content;
   border: 2px solid ${barBack};
   border-radius: 4px;
-  padding: 0.25rem;
+  margin-left: 1rem;
+  padding: 0.2rem;
 `;
 
 //Footer
@@ -122,7 +120,8 @@ const Foot = styled.footer`
 export {
   NaviBar,
   NavLinks,
-  // NavLinksMini,
+  InputContainer,
+  InputField,
   NavMenuIcon,
   Listed,
   HomeContent,

@@ -1,5 +1,9 @@
 const Admin = () => {
-  return ( <div>Admin</div> );
-}
- 
+  return (
+    <main className="mainContainer">
+      <div>Admin</div>
+    </main>
+  );
+};
+
 export default Admin;

@@ -1,5 +1,9 @@
 const VisorRecetas = () => {
-  return ( <div>Visor Recetas</div>  );
-}
- 
+  return (
+    <main className="mainContainer">
+      <div>Visor Recetas</div>
+    </main>
+  );
+};
+
 export default VisorRecetas;

@@ -97,6 +97,30 @@ button {
 	
 }
 
+.mainContainer {
+	margin-top: 10rem;
+}
+
+#fichaMain {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 50vw;
+
+}
+
+@media only screen and (max-width: 600px) {
+	#fichaMain {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: space-between;
+		gap: 5rem;
+		width: fit-content;	
+	}
+ }
+
+
 
 
 

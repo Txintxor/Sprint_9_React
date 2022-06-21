@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import {
@@ -9,22 +8,17 @@ import {
 } from "../styled-c/styled-components.js";
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const element = document.querySelector("#navMenu");
 
   const toggle = () => {
-    if (window.screen.width < 601) {
-      isOpen
-        ? (element.style.display = "flex")
-        : (element.style.display = "none");
-    } else {
+    if (element.style.display === "none") {
       element.style.display = "flex";
+    } else {
+      element.style.display = "none";
     }
   };
 
   const { logout } = useAuth0();
-
-  // Recogemos el elemento del menú de la barra de navegación
 
   return (
     <NaviBar>
@@ -38,10 +32,14 @@ const NavBar = () => {
           </button>
         </Listed>
         <Listed>
-          <a href="/Recetas">Recetas</a>
+          <a href="/Ficha">Crea ficha</a>
         </Listed>
         <Listed>
-          <a href="/Escandallos">Escandallos</a>
+          <a href="/Produccion">Listas de producción</a>
+        </Listed>
+        
+        <Listed>
+          <a href="/Recetas">Recetas</a>
         </Listed>
       </NavLinks>
       <NavMenuIcon onClick={toggle}>
@@ -51,23 +49,6 @@ const NavBar = () => {
           <div className="bar"></div>
         </div>
       </NavMenuIcon>
-      {/* {isOpen && (
-        <NavLinksMini>
-          <Listed>
-            <button
-              onClick={() => logout({ returnTo: window.location.origin })}
-            >
-              Log out
-            </button>
-          </Listed>
-          <Listed>
-            <a href="/Recetas">Recetas</a>
-          </Listed>
-          <Listed>
-            <a href="/Escandallos">Escandallos</a>
-          </Listed>
-        </NavLinksMini>
-      )} */}
     </NaviBar>
   );
 };
