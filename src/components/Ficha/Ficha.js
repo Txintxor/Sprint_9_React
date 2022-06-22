@@ -1,7 +1,9 @@
 import { useState } from "react";
 import {
   InputContainer,
+  OutputContainer,
   InputField,
+  OutputList,
   Button,
 } from "../styled-c/styled-components";
 
@@ -32,8 +34,6 @@ const Ficha = () => {
       default:
         break;
     }
-
-    console.log(ficha);
   };
 
   //Método que recoge los inputs de ingredientes y procesos y los introduce
@@ -41,24 +41,28 @@ const Ficha = () => {
   const fillArrayFicha = (id, value) => {
     if (!value) return;
     else {
-    const element = document.querySelector("#" + id);
+      const element = document.querySelector("#" + id);
 
-    switch (id) {
-      case "ingrediente":
-        const ingrediente = ficha.ingredientes.push(value);
-        setFicha((prevState) => ({ ...prevState, ingrediente: ingrediente }));
-        element.value = "";
-        break;
-      case "proceso":
-        const proceso = ficha.procesos.push(value);
-        setFicha((prevState) => ({ ...prevState, proceso: proceso }));
-        element.value = "";
-        break;
-      default:
-        break;
+      switch (id) {
+        case "ingrediente":
+          const ingre = ficha.ingredientes.concat(value);
+          console.log(ingre);
+          setFicha((prevState) => ({
+            ...prevState,
+            ingredientes: ingre,
+          }));
+          element.value = "";
+          break;
+        case "proceso":
+          const procesos = ficha.procesos.concat(value);
+          setFicha((prevState) => ({ ...prevState, procesos: procesos }));
+          element.value = "";
+          break;
+        default:
+          break;
+      }
+      
     }
-    console.log(ficha);
-  }
   };
 
   //Método que comprueba que todos los campos están rellenos y los
@@ -68,15 +72,17 @@ const Ficha = () => {
     const keys = Object.values(ficha);
 
     keys.map((e) => {
-      console.log(e);
       if (e === undefined) {
         bool = false;
+        console.log("Faltan datos");
+        return 0  ;
       }
+      window.localStorage.setItem(
+        ficha.nom + ficha.fecha,
+        JSON.stringify(ficha)
+      );
+      return 0;
     });
-
-    bool
-      ? window.localStorage.setItem(ficha.nom + ficha.fecha, ficha)
-      : console.log("Faltan datos");
   };
 
   //Retorno a Renderizar
@@ -136,29 +142,43 @@ const Ficha = () => {
 
       {/* Bloque que muestra los inputs introducidos y tiene el botón de envío */}
       <article>
-        <InputContainer>
+        <OutputContainer>
           <label htmlFor="nom">Nombre plato</label>
-          <p id="nomP">{ficha.nom}</p>
+          <OutputList>
+            <p className="outputP" id="nomP">
+              {ficha.nom}
+            </p>
+          </OutputList>
           <label htmlFor="partida">Partida</label>
-          <p id="partidaP">{ficha.partida}</p>
+          <OutputList>
+            <p className="outputP" id="partidaP">
+              {ficha.partida}
+            </p>
+          </OutputList>
           <label htmlFor="fecha">Fecha</label>
-          <p id="fechaP">{ficha.fecha}</p>
-        </InputContainer>
-        <InputContainer>
+          <OutputList>
+            <p className="outputP" id="fechaP">
+              {ficha.fecha}
+            </p>
+          </OutputList>
           <label htmlFor="ingrediente">Ingredientes</label>
-          {ficha.ingredientes.map((e, index) => (
-            <p id="ingredientesP" key={e + index}>
-              {e}
-            </p>
-          ))}
+          <OutputList>
+            {ficha.ingredientes.map((e, index) => (
+              <p id="ingredientesP" key={e + index}>
+                -{e}
+              </p>
+            ))}
+          </OutputList>
           <label htmlFor="proceso">Proceso de elaboración</label>
-          {ficha.procesos.map((e, index) => (
-            <p id="procesosP" key={e + index}>
-              {e}
-            </p>
-          ))}
-        </InputContainer>
-        <Button onClick={enviar}>Envia</Button>
+          <OutputList>
+            {ficha.procesos.map((e) => (
+              <p id="procesosP" key={e}>
+                -{e}
+              </p>
+            ))}
+          </OutputList>{" "}
+          <Button onClick={enviar}>Envia</Button>
+        </OutputContainer>
       </article>
     </main>
   );

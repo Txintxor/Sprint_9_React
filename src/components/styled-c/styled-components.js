@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 // const main = "blue";
 const second = "yellow";
-// const border = "red";
+const border = "red";
 // const font= "black";
 const secondFont = "white";
 const barBack = "rgb(78, 72, 72)";
@@ -40,7 +40,7 @@ const NavLinks = styled.ul`
     right: -30px;
     top: 50px;
     background-color: ${barBack};
-    border: 2px solid ${second};
+    border: 2px solid ${border};
     border-radius: 0 0 4px 4px;
     border-top: none;
     padding: 0.25rem;
@@ -78,31 +78,51 @@ const HomeContent = styled.article`
 const Card = styled.a`
   background-color: ${barBack};
   color: ${secondFont};
-  border: 2px solid ${second};
+  border: 2px solid ${border};
   border-radius: 4px;
   padding: 1rem;
 `;
 
-
 //Componente Ficha
 
 const InputContainer = styled.section`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
+`;
+
+const OutputContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 3rem;
 `;
 
 const InputField = styled.input`
-width : 15rem;
-padding: 0.25rem;
-margin-bottom: 1rem;
-border
+  width: 15rem;
+  padding: 0.25rem;
+  margin: 0.5rem 0 1rem 0;
+  border: 2px solid ${border};
+  border-radius: 4px;
 `;
+
+const OutputList = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 2px solid ${border};
+  border-radius: 4px;
+  margin: 0.5rem 0 1rem 0;
+  padding: 0.5rem;
+`;
+
 //Componentes genéricos
 const Button = styled.a`
-  border: 2px solid ${barBack};
+width: fit-content;  
+border: 2px solid ${border};
   border-radius: 4px;
-  margin-left: 1rem;
-  padding: 0.2rem;
+  padding: 0.2rem 1rem;
+  text-align: center;
+  align-self:center;
+
 `;
 
 //Footer
@@ -121,7 +141,9 @@ export {
   NaviBar,
   NavLinks,
   InputContainer,
+  OutputContainer,
   InputField,
+  OutputList,
   NavMenuIcon,
   Listed,
   HomeContent,

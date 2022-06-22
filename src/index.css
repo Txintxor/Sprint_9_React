@@ -109,6 +109,9 @@ button {
 
 }
 
+.outputP {
+	margin-top: 0.3rem;
+}
 @media only screen and (max-width: 600px) {
 	#fichaMain {
 		display: flex;

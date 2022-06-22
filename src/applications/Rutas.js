@@ -1,11 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 
-// import PrivateRoute from "./PrivateRoute";
-
 import Home from "../components/Home/Home";
 import Ficha from "../components/Ficha/Ficha";
 import Recetas from "../components/Recetas/Recetas";
+import RecetasOutput from "../components/Recetas/RecetasOutput";
 import Produccion from "../components/Produccion/Produccion";
 import EscEvento from "../components/Produccion/ProdEvento";
 import EscPartida from "../components/Produccion/ProdPartida";
@@ -19,6 +18,7 @@ const Rutas = () => {
         <Route exact path="/" element={<Home/>} />
         <Route exact path="/Ficha" element={<Ficha/>} />
         <Route exact path="/Recetas" element={<Recetas/>} />
+        <Route exact path="/RecetasOutput" element={<RecetasOutput/>} />
         <Route exact path="/Produccion" element={<Produccion/>} />
         <Route exact path="/EscEvento" element={<EscEvento/>} />
         <Route exact path="/EscPartida" element={<EscPartida/>} />
