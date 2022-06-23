@@ -4,16 +4,16 @@ const Home = () => {
   return (
     <main className="mainContainer">
       <HomeContent>
-        <Card href="/Ficha">
+        <Card className="card" href="/Ficha">
           <p>Crea ficha técnica</p>
         </Card>
-        <Card href="/Recetas">
+        <Card className="card" href="/Recetas">
           <p>Indice de recetas</p>
         </Card>
-        <Card href="/EscEvento">
+        <Card className="card" href="/EscEvento">
           <p>Crea lista de producción para eventos</p>
         </Card>
-        <Card href="/EscPartida">
+        <Card className="card" href="/EscPartida">
           <p>Crea lista de producción para partida</p>
         </Card>
       </HomeContent>

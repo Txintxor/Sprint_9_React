@@ -9,20 +9,24 @@ import Produccion from "../components/Produccion/Produccion";
 import EscEvento from "../components/Produccion/ProdEvento";
 import EscPartida from "../components/Produccion/ProdPartida";
 import Admin from "../components/Admin/Admin";
+import AdminLogin from "../components/Admin/AdminLogin";
+import AdminRegister from "../components/Admin/AdminRegister";
 import Page404 from "../components/Page404/Page404";
 
 const Rutas = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Home/>} />
-        <Route exact path="/Ficha" element={<Ficha/>} />
-        <Route exact path="/Recetas" element={<Recetas/>} />
-        <Route exact path="/RecetasOutput" element={<RecetasOutput/>} />
-        <Route exact path="/Produccion" element={<Produccion/>} />
-        <Route exact path="/EscEvento" element={<EscEvento/>} />
-        <Route exact path="/EscPartida" element={<EscPartida/>} />
-        <Route exact path="/Admin" element={<Admin/>} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/Ficha" element={<Ficha />} />
+        <Route exact path="/Recetas" element={<Recetas />} />
+        <Route exact path="/RecetasOutput" element={<RecetasOutput />} />
+        <Route exact path="/Produccion" element={<Produccion />} />
+        <Route exact path="/EscEvento" element={<EscEvento />} />
+        <Route exact path="/EscPartida" element={<EscPartida />} />
+        <Route exact path="/Admin" element={<Admin />} />
+        <Route exact path="/AdminLogin" element={<AdminLogin />} />
+        <Route exact path="/AdminRegister" element={<AdminRegister />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>

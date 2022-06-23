@@ -1,7 +1,7 @@
 import {
   OutputContainer,
   OutputList,
-  Button,
+  Label,
 } from "../styled-c/styled-components";
 
 import { useLocation } from "react-router-dom";
@@ -20,26 +20,26 @@ const ficha = location.state;
   {/* Bloque que muestra los inputs introducidos y tiene el botón de envío */}
   <article>
     <OutputContainer>
-      <label htmlFor="nom">Nombre plato</label>
+      <Label htmlFor="nom">Nombre plato</Label>
       <OutputList>
         <p className="outputP" id="nomP">
           {ficha.nom}
         </p>
       </OutputList>
-      <label htmlFor="partida">Partida</label>
+      <Label htmlFor="partida">Partida</Label>
       <OutputList>
         <p className="outputP" id="partidaP">
           {ficha.partida}
         </p>
       </OutputList>
 
-      <label htmlFor="fecha">Fecha</label>
+      <Label htmlFor="fecha">Fecha</Label>
       <OutputList>
         <p className="outputP" id="fechaP">
           {ficha.fecha}
         </p>
       </OutputList>
-      <label htmlFor="ingrediente">Ingredientes</label>
+      <Label htmlFor="ingrediente">Ingredientes</Label>
       <OutputList>
         {ficha.ingredientes.map((e, index) => (
           <p id="ingredientesP" key={e + index}>
@@ -47,7 +47,7 @@ const ficha = location.state;
           </p>
         ))}
       </OutputList>
-      <label htmlFor="proceso">Proceso de elaboración</label>
+      <Label htmlFor="proceso">Proceso de elaboración</Label>
       <OutputList>
         {ficha.procesos.map((e, index) => (
           <p id="procesosP" key={e + index}>

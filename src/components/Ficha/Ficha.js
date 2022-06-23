@@ -4,7 +4,10 @@ import {
   OutputContainer,
   InputField,
   OutputList,
+  FormList,
+  Label,
   Button,
+  Button2,
 } from "../styled-c/styled-components";
 
 const Ficha = () => {
@@ -16,6 +19,9 @@ const Ficha = () => {
     ingredientes: [],
     procesos: [],
   });
+
+  //Estado que ayuda a indicar que faltan introducir datos
+  const[datos, setDatos] = useState(false);
 
   //Método que recoge los datos introducidos en el input y los pasa al
   //estado ficha
@@ -61,26 +67,26 @@ const Ficha = () => {
         default:
           break;
       }
-      
     }
   };
 
   //Método que comprueba que todos los campos están rellenos y los
   //guarda (de momento en localStorage)
-  const enviar = () => {
-    let bool = true;
-    const keys = Object.values(ficha);
-
-    keys.map((e) => {
-      if (e === undefined) {
-        bool = false;
+  const enviar = (e) => {
+    const values = Object.values(ficha);
+    console.log(values);
+    values.map((element) => {
+      if (element.length === 0) {
+        e.preventDefault();
         console.log("Faltan datos");
-        return 0  ;
+        setDatos(true);
+        return 0;
       }
       window.localStorage.setItem(
         ficha.nom + ficha.fecha,
         JSON.stringify(ficha)
       );
+      setDatos(false);
       return 0;
     });
   };
@@ -91,16 +97,16 @@ const Ficha = () => {
       {/* Bloque de inputs */}
       <article>
         <InputContainer>
-          <label htmlFor="nom">Nombre plato</label>
+          <Label htmlFor="nom">Nombre plato</Label>
           <InputField onChange={fillFicha} type="text" name="nom" id="nom" />
-          <label htmlFor="partida">Partida</label>
+          <Label htmlFor="partida">Partida</Label>
           <InputField
             onChange={fillFicha}
             type="text"
             name="partida"
             id="partida"
           />
-          <label htmlFor="fecha">Fecha</label>
+          <Label htmlFor="fecha">Fecha</Label>
           <InputField
             onChange={fillFicha}
             type="date"
@@ -109,8 +115,8 @@ const Ficha = () => {
           />
         </InputContainer>
         <InputContainer>
-          <label htmlFor="ingrediente">Ingredientes</label>
-          <div style={{ display: "inline-block" }}>
+          <Label htmlFor="ingrediente">Añade ingrediente</Label>
+          <div className="inputField">
             <InputField type="text" name="ingrediente" id="ingrediente" />
             <Button
               onClick={() =>
@@ -123,8 +129,8 @@ const Ficha = () => {
               +
             </Button>
           </div>
-          <label htmlFor="proceso">Proceso de elaboración</label>
-          <div style={{ display: "inline-block" }}>
+          <Label htmlFor="proceso">Añade paso de elaboración</Label>
+          <div className="inputField">
             <InputField type="text" name="proceso" id="proceso" />
             <Button
               onClick={() =>
@@ -141,35 +147,35 @@ const Ficha = () => {
       </article>
 
       {/* Bloque que muestra los inputs introducidos y tiene el botón de envío */}
-      <article>
+      <FormList onSubmit={enviar}>
         <OutputContainer>
-          <label htmlFor="nom">Nombre plato</label>
+          <Label htmlFor="nom">Nombre plato</Label>
           <OutputList>
             <p className="outputP" id="nomP">
               {ficha.nom}
             </p>
           </OutputList>
-          <label htmlFor="partida">Partida</label>
+          <Label htmlFor="partida">Partida</Label>
           <OutputList>
             <p className="outputP" id="partidaP">
               {ficha.partida}
             </p>
           </OutputList>
-          <label htmlFor="fecha">Fecha</label>
+          <Label htmlFor="fecha">Fecha</Label>
           <OutputList>
             <p className="outputP" id="fechaP">
               {ficha.fecha}
             </p>
           </OutputList>
-          <label htmlFor="ingrediente">Ingredientes</label>
+          <Label htmlFor="ingrediente">Ingredientes</Label>
           <OutputList>
             {ficha.ingredientes.map((e, index) => (
-              <p id="ingredientesP" key={e + index}>
+              <p className="outputP" id="ingredientesP" key={e + index}>
                 -{e}
               </p>
             ))}
           </OutputList>
-          <label htmlFor="proceso">Proceso de elaboración</label>
+          <Label htmlFor="proceso">Proceso de elaboración</Label>
           <OutputList>
             {ficha.procesos.map((e) => (
               <p id="procesosP" key={e}>
@@ -177,9 +183,11 @@ const Ficha = () => {
               </p>
             ))}
           </OutputList>{" "}
-          <Button onClick={enviar}>Envia</Button>
+          <Button2 type="submit">Envia</Button2>
         </OutputContainer>
-      </article>
+        {datos && <OutputList style={{textAlign: "center"}}><h1>Faltan datos</h1></OutputList>}
+
+      </FormList>
     </main>
   );
 };

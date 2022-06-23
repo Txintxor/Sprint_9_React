@@ -2,12 +2,9 @@ import styled from "styled-components";
 
 ///VARIABLES DE CSS
 
-// const main = "blue";
-const second = "yellow";
-const border = "red";
-// const font= "black";
-const secondFont = "white";
-const barBack = "rgb(78, 72, 72)";
+const border = "#6B9E72";
+const whiteC = "#EFF2FB";
+const barBack = "#406345";
 
 //STYLED COMPONENTS
 
@@ -21,7 +18,7 @@ const NaviBar = styled.nav`
   width: 100%;
   padding: 1rem 0;
   background: ${barBack};
-  color: ${secondFont};
+  color: ${whiteC};
 
   @media (max-width: 600px) {
     justify-content: space-around;
@@ -47,6 +44,8 @@ const NavLinks = styled.ul`
   }
 `;
 
+
+
 const Listed = styled.li`
   padding: 0 1rem;
 `;
@@ -67,7 +66,7 @@ const HomeContent = styled.article`
   flex-direction: column;
   max-width: 1200px;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
+  gap: 3rem;
 
   @media (max-width: 600px) {
     margin-top: 8rem;
@@ -77,10 +76,19 @@ const HomeContent = styled.article`
 
 const Card = styled.a`
   background-color: ${barBack};
-  color: ${secondFont};
+  color: ${whiteC};
   border: 2px solid ${border};
   border-radius: 4px;
-  padding: 1rem;
+  padding: 3rem;
+  text-align: center;
+  font-size: 2rem;
+  cursor: pointer;
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin:0.75rem;
+  }
+ 
 `;
 
 //Componente Ficha
@@ -93,14 +101,17 @@ const InputContainer = styled.section`
 const OutputContainer = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin-bottom: 3rem;
+  &:media (max-width: 900px) {
+    width: fit-content;
+  }
 `;
 
 const InputField = styled.input`
   width: 15rem;
-  padding: 0.25rem;
-  margin: 0.5rem 0 1rem 0;
+  height: 1.5rem;
+  padding: 0.35rem;
+  margin: 1rem 0;
   border: 2px solid ${border};
   border-radius: 4px;
 `;
@@ -112,17 +123,18 @@ const OutputList = styled.div`
   border-radius: 4px;
   margin: 0.5rem 0 1rem 0;
   padding: 0.5rem;
+  background-color: ${whiteC};
+  height: fit-content;
 `;
-
-//Componentes genéricos
-const Button = styled.a`
-width: fit-content;  
-border: 2px solid ${border};
+const FormList = styled.form`
+  display: flex;
+  flex-direction: column;
+  border: 2px solid ${border};
   border-radius: 4px;
-  padding: 0.2rem 1rem;
-  text-align: center;
-  align-self:center;
-
+  margin: 0.5rem 0 1rem 0;
+  padding: 0.5rem;
+  font: inherit;
+  color: inherit;
 `;
 
 //Footer
@@ -131,11 +143,40 @@ const Foot = styled.footer`
   width: 100%;
   bottom: 0;
   display: flex;
+  margin-top: 5rem;
+  padding: .5rem 0;
   flex-direction: row;
   justify-content: center;
   background: ${barBack};
-  color: ${secondFont};
+  color: ${whiteC};
 `;
+
+//Componentes genéricos
+const Button = styled.a`
+  width: fit-content;
+  border: 2px solid ${border};
+  border-radius: 4px;
+  padding:  .2rem .4rem;
+  text-align: center;
+  align-self: center;
+  background-color: ${whiteC};
+`;
+
+const Button2 = styled.button`
+  width: fit-content;
+  border: 2px solid ${border};
+  border-radius: 4px;
+  padding:  .2rem .4rem;
+  text-align: center;
+  align-self: center;
+  background-color: ${whiteC};
+  margin: 1rem 0;
+`;
+
+const Label = styled.label`
+  font-weight: 800;
+`;
+
 
 export {
   NaviBar,
@@ -144,10 +185,13 @@ export {
   OutputContainer,
   InputField,
   OutputList,
+  FormList,
   NavMenuIcon,
   Listed,
   HomeContent,
   Card,
   Button,
+  Button2,
+  Label,
   Foot,
 };
