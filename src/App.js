@@ -9,16 +9,16 @@ const App = () => {
   // const [loaded, setIsLoaded] = useState(false);
 
   return (
- <>
-    <div className="background"></div>
-    <div className="App" >
-      <NavBar />
-      <MyProvider>
-        <Rutas />
-      </MyProvider>
-      <Footer />
-    </div></>
-    
+    <>
+      <div className="background"></div>
+      <div className="App">
+        <NavBar />
+        <MyProvider>
+          <Rutas />
+        </MyProvider>
+        <Footer />
+      </div>
+    </>
   );
 };
 
