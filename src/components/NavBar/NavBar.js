@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import {
@@ -8,13 +9,16 @@ import {
 } from "../styled-c/styled-components.js";
 
 const NavBar = () => {
+  const [tog, setTog] = useState(false);
   const element = document.querySelector("#navMenu");
 
   const toggle = () => {
-    if (element.style.display === "none") {
+    if (!tog) {
       element.style.display = "flex";
+      setTog(true);
     } else {
       element.style.display = "none";
+      setTog(false);
     }
   };
 
