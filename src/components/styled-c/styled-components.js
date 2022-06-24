@@ -67,9 +67,7 @@ const HomeContent = styled.article`
   max-width: 1200px;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 3rem;
-
   @media (max-width: 600px) {
-    margin-top: 8rem;
     gap: 2rem;
   }
 `;
@@ -143,7 +141,6 @@ const Foot = styled.footer`
   width: 100%;
   bottom: 0;
   display: flex;
-  margin-top: 5rem;
   padding: .5rem 0;
   flex-direction: row;
   justify-content: center;
