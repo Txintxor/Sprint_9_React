@@ -4,11 +4,12 @@ import {
   OutputContainer,
   InputField,
   OutputList,
-  FormList,
+  DivList,
   Label,
   Button,
   Button2,
-  CardDiv
+  OutputLi,
+  DelButton,
 } from "../styled-c/styled-components";
 
 import { saveRecipe } from "../../applications/api";
@@ -118,10 +119,9 @@ const Ficha = () => {
 
   //Retorno a Renderizar
   return (
-    
     <main className="mainContainer" id="fichaMain">
       {/* Bloque de inputs */}
-      <article>
+      <DivList>
         <InputContainer>
           <Label htmlFor="nom">Nombre plato</Label>
           <InputField
@@ -198,10 +198,11 @@ const Ficha = () => {
             </Button>
           </div>
         </InputContainer>
-      </article>
+      </DivList>
 
       {/* Bloque que muestra los inputs introducidos y tiene el botón de envío */}
-      <FormList onSubmit={enviar}>
+      {/* <FormList onSubmit={enviar}> */}
+      <DivList>
         <OutputContainer>
           <Label htmlFor="nom">Nombre plato</Label>
           <OutputList>
@@ -224,27 +225,47 @@ const Ficha = () => {
           <Label htmlFor="ingrediente">Ingredientes</Label>
           <OutputList>
             {ficha.ingredientes.map((e, index) => (
-              <p className="outputP" id="ingredientesP" key={e + index}>
-                -{e}
-              </p>
+              <OutputLi key={e + index}>
+                <p className="outputP" id="ingredientesP">
+                  - {e}{" "}
+                  <DelButton
+                    onClick={(e) =>
+                      (e.target.parentElement.parentElement.innerHTML = "")
+                    }
+                  >
+                    X
+                  </DelButton>
+                </p>
+              </OutputLi>
             ))}
           </OutputList>
           <Label htmlFor="proceso">Proceso de elaboración</Label>
           <OutputList>
-            {ficha.procesos.map((e) => (
-              <p id="procesosP" className="outputP" key={e}>
-                -{e}
-              </p>
+            {ficha.procesos.map((e, index) => (
+              <OutputLi key={e + index}>
+                <p id="procesosP" className="outputP">
+                  - {e}{" "}
+                  <DelButton
+                    onClick={(e) =>
+                      (e.target.parentElement.parentElement.innerHTML = "")
+                    }
+                  >
+                    X
+                  </DelButton>
+                </p>
+              </OutputLi>
             ))}
           </OutputList>{" "}
-          <Button2 type="submit">Envia</Button2>
+          <Button2 onClick={enviar}> Envia</Button2>
+          {/* <Button2 type="submit">Envia</Button2> */}
         </OutputContainer>
         {/* {!datos && (
           <OutputList style={{ textAlign: "center" }}>
             <h1>Faltan datos</h1>
           </OutputList>
         )} */}
-      </FormList>
+        {/* </FormList> */}
+      </DivList>
     </main>
   );
 };

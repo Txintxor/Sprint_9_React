@@ -24,7 +24,7 @@ export const InputField = styled.input`
   border-radius: 4px;
 `;
 
-export const OutputList = styled.div`
+export const OutputList = styled.ul`
   display: flex;
   flex-direction: column;
   border: 2px solid ${border};
@@ -44,3 +44,5 @@ export const FormList = styled.form`
   font: inherit;
   color: inherit;
 `;
+
+
