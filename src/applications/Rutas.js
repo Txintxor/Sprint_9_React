@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
 
+import NavBar from "../components/NavBar/NavBar";
+import Footer from "../components/Footer/Footer";
 import Home from "../components/Home/Home";
 import Ficha from "../components/Ficha/Ficha";
 import Recetas from "../components/Recetas/Recetas";
@@ -11,26 +12,33 @@ import EscPartida from "../components/Produccion/ProdPartida";
 import Admin from "../components/Admin/Admin";
 import AdminLogin from "../components/Admin/AdminLogin";
 import AdminRegister from "../components/Admin/AdminRegister";
+import Login from "../components/Login/Login";
+import Register from "../components/Login/Register";
 import Page404 from "../components/Page404/Page404";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const Rutas = () => {
   return (
     <BrowserRouter>
+      <NavBar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/Ficha" element={<Ficha />} />
-        <Route exact path="/Recetas" element={<Recetas />} />
-        <Route exact path="/RecetasOutput" element={<RecetasOutput />} />
-        <Route exact path="/Produccion" element={<Produccion />} />
-        <Route exact path="/EscEvento" element={<EscEvento />} />
-        <Route exact path="/EscPartida" element={<EscPartida />} />
-        <Route exact path="/Admin" element={<Admin />} />
-        <Route exact path="/AdminLogin" element={<AdminLogin />} />
-        <Route exact path="/AdminRegister" element={<AdminRegister />} />
+        <Route exact path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route exact path="/Ficha" element={<ProtectedRoute><Ficha /></ProtectedRoute>} />
+        <Route exact path="/Recetas" element={<ProtectedRoute><Recetas /></ProtectedRoute>} />
+        <Route exact path="/RecetasOutput" element={<ProtectedRoute><RecetasOutput /></ProtectedRoute>} />
+        <Route exact path="/Produccion" element={<ProtectedRoute><Produccion /></ProtectedRoute>} />
+        <Route exact path="/EscEvento" element={<ProtectedRoute><EscEvento /></ProtectedRoute>} />
+        <Route exact path="/EscPartida" element={<ProtectedRoute><EscPartida /></ProtectedRoute>} />
+        <Route exact path="/Admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+        <Route exact path="/AdminLogin" element={<ProtectedRoute><AdminLogin /></ProtectedRoute>} />
+        <Route exact path="/AdminRegister" element={<ProtectedRoute><AdminRegister /></ProtectedRoute>} />
+        <Route exact path="/Login" element={<Login />} />
+        <Route exact path="/Registre" element={<Register />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
 
-export default withAuthenticationRequired(Rutas);
+export default Rutas;

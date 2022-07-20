@@ -8,7 +8,10 @@ import {
   Label,
   Button,
   Button2,
+  CardDiv
 } from "../styled-c/styled-components";
+
+import { saveRecipe } from "../../applications/api";
 
 const Ficha = () => {
   //Estado que guardara los datos de la ficha técnica
@@ -20,8 +23,8 @@ const Ficha = () => {
     procesos: [],
   });
 
-  //Estado que ayuda a indicar que faltan introducir datos
-  const[datos, setDatos] = useState(false);
+  //Estado que indica que faltan datos por introducir
+  const [datos, setDatos] = useState(true);
 
   //Método que recoge los datos introducidos en el input y los pasa al
   //estado ficha
@@ -52,7 +55,6 @@ const Ficha = () => {
       switch (id) {
         case "ingrediente":
           const ingre = ficha.ingredientes.concat(value);
-          console.log(ingre);
           setFicha((prevState) => ({
             ...prevState,
             ingredientes: ingre,
@@ -73,38 +75,69 @@ const Ficha = () => {
   //Método que comprueba que todos los campos están rellenos y los
   //guarda (de momento en localStorage)
   const enviar = (e) => {
+    const output = Array.from(document.querySelectorAll(".outputP"));
+    const input = Array.from(document.querySelectorAll(".input"));
     const values = Object.values(ficha);
-    console.log(values);
-    values.map((element) => {
-      if (element.length === 0) {
+    for (let i = 0; i < values.length; i++) {
+      if (values[i].length === 0) {
         e.preventDefault();
-        console.log("Faltan datos");
+        alert("Faltan datos");
+        setDatos(false);
+        break;
+      } else {
         setDatos(true);
-        return 0;
+        if (i === values.length - 1) {
+          e.preventDefault();
+          saveRecipe(ficha);
+          //Reinicia valores y texto de los inputs y outputs
+          for (let i = 0; i < output.length; i++) {
+            output[i].innerText = "";
+          }
+          for (let i = 0; i < input.length; i++) {
+            input[i].value = "";
+          }
+          setFicha({
+            nom: "",
+            partida: "",
+            fecha: "",
+            ingredientes: [],
+            procesos: [],
+          });
+        }
       }
-      window.localStorage.setItem(
-        ficha.nom + ficha.fecha,
-        JSON.stringify(ficha)
-      );
-      setDatos(false);
-      return 0;
-    });
+    }
+  };
+
+  //ASÍ SE PODRAN AGREGAR Ingredientes Y procesos LOS DATOS APRETANDO ENTER
+  const handleKeyPress = (e) => {
+    const element = document.querySelector(e);
+    if (element.id !== 0) {
+      fillArrayFicha(element.id, element.value);
+    }
   };
 
   //Retorno a Renderizar
   return (
+    
     <main className="mainContainer" id="fichaMain">
       {/* Bloque de inputs */}
       <article>
         <InputContainer>
           <Label htmlFor="nom">Nombre plato</Label>
-          <InputField onChange={fillFicha} type="text" name="nom" id="nom" />
+          <InputField
+            onChange={fillFicha}
+            type="text"
+            name="nom"
+            id="nom"
+            className="input"
+          />
           <Label htmlFor="partida">Partida</Label>
           <InputField
             onChange={fillFicha}
             type="text"
             name="partida"
             id="partida"
+            className="input"
           />
           <Label htmlFor="fecha">Fecha</Label>
           <InputField
@@ -112,12 +145,23 @@ const Ficha = () => {
             type="date"
             name="fecha"
             id="fecha"
+            className="input"
           />
         </InputContainer>
         <InputContainer>
           <Label htmlFor="ingrediente">Añade ingrediente</Label>
           <div className="inputField">
-            <InputField type="text" name="ingrediente" id="ingrediente" />
+            <InputField
+              onKeyDown={(e) => {
+                if (e.code === "Enter") {
+                  handleKeyPress("#ingrediente");
+                }
+              }}
+              className="arrayInput, input"
+              type="text"
+              name="ingrediente"
+              id="ingrediente"
+            />
             <Button
               onClick={() =>
                 fillArrayFicha(
@@ -130,8 +174,18 @@ const Ficha = () => {
             </Button>
           </div>
           <Label htmlFor="proceso">Añade paso de elaboración</Label>
-          <div className="inputField">
-            <InputField type="text" name="proceso" id="proceso" />
+          <div className="inputField, input">
+            <InputField
+              onKeyDown={(e) => {
+                if (e.code === "Enter") {
+                  handleKeyPress("#proceso");
+                }
+              }}
+              className="arrayInput"
+              type="text"
+              name="proceso"
+              id="proceso"
+            />
             <Button
               onClick={() =>
                 fillArrayFicha(
@@ -178,15 +232,18 @@ const Ficha = () => {
           <Label htmlFor="proceso">Proceso de elaboración</Label>
           <OutputList>
             {ficha.procesos.map((e) => (
-              <p id="procesosP" key={e}>
+              <p id="procesosP" className="outputP" key={e}>
                 -{e}
               </p>
             ))}
           </OutputList>{" "}
           <Button2 type="submit">Envia</Button2>
         </OutputContainer>
-        {datos && <OutputList style={{textAlign: "center"}}><h1>Faltan datos</h1></OutputList>}
-
+        {/* {!datos && (
+          <OutputList style={{ textAlign: "center" }}>
+            <h1>Faltan datos</h1>
+          </OutputList>
+        )} */}
       </FormList>
     </main>
   );

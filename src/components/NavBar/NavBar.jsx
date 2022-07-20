@@ -1,15 +1,21 @@
-import { useState } from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserAuth } from "../../context/AuthContext";
 
 import {
+  LogoutButton,
   NaviBar,
   NavLinks,
   Listed,
   NavMenuIcon,
-} from "../styled-c/styled-components.js";
+} from "./NavBar.styled";
 
 const NavBar = () => {
+  const { logout, user } = UserAuth();
   const [tog, setTog] = useState(false);
+  const navigate = useNavigate();
+
+
   const element = document.querySelector("#navMenu");
 
   const toggle = () => {
@@ -22,7 +28,17 @@ const NavBar = () => {
     }
   };
 
-  const { logout } = useAuth0();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/Login");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+
+
 
   return (
     <NaviBar>
@@ -31,20 +47,32 @@ const NavBar = () => {
       </a>
       <NavLinks id="navMenu">
         <Listed>
-          <button onClick={() => logout({ returnTo: window.location.origin })}>
-            Log out
-          </button>
-        </Listed>
-        <Listed>
           <a href="/Ficha">Crea ficha</a>
         </Listed>
-        <Listed>
+        {/* <Listed>
           <a href="/Produccion">Listas de producción</a>
-        </Listed>
-        
+        </Listed> */}
         <Listed>
           <a href="/Recetas">Recetas</a>
         </Listed>
+        {!!user === false && (
+          <Listed>
+            <a href="/Login">Login</a>
+          </Listed>
+        )}
+        {!!user === false && (
+          <Listed>
+            <a href="/Registre">Registro</a>
+          </Listed>
+        )}
+        {!!user && (
+          <Listed>
+            <LogoutButton onClick={handleLogout}>Desconecta</LogoutButton>
+          </Listed>
+        )}
+        {user && <Listed>
+          <p>{user.email}</p>
+        </Listed>}
       </NavLinks>
       <NavMenuIcon onClick={toggle}>
         <div>
