@@ -1,4 +1,5 @@
-import { Card, HomeContent } from "../styled-c/styled-components";
+import { HomeContent } from "../Home/Home.styled";
+import { Card } from "../styled-c/styled-components";
 
 const Produccion = () => {
   return (

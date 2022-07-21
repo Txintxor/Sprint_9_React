@@ -1,4 +1,4 @@
-import {Foot} from "../styled-c/styled-components";
+import {Foot} from "./Footer.styled";
 
 
 const Footer = () => {

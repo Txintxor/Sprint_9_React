@@ -1,31 +1,39 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getRecipes } from "../../applications/api";
 
-import { OutputList, Card } from "../styled-c/styled-components";
+
+import { OutputList, CardDiv } from "../styled-c/styled-components";
+
+
+
 const localArray = [];
 const Recetas = () => {
-  const [recetas, setRecetas] = useState([]);
+  const [recetas, setRecetas] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchRecipe = async () => {
+      const data = await getRecipes();
+      data.docs.map( e => localArray.push(e.data()));
+      setRecetas(localArray);
+      setLoading(false);      
+  }
+
 
   useEffect(() => {
-    Object.keys(localStorage).forEach((key) =>
-      localArray.push(JSON.parse(localStorage.getItem(key)))
-    );
-    setRecetas(localArray);
+    fetchRecipe();
   }, []);
 
-  // const muestra = () => {
-  //   Object.keys(localStorage).forEach((key) => {
-  //     localArray.push(localStorage.getItem(key));
-  //   });
-  //   localArray.map((e) => console.log(e));
-  // };
+  useEffect(() => {
+    
+  },[recetas])
 
   return (
     <main className="mainContainer" id="fichaMain">
       <article>
-        <Card>Indice de recetas</Card>
+        <CardDiv>Indice de recetas</CardDiv>
         <div  style={{ marginTop: "8rem" }}>
-          {recetas.map((e) => (
+          {!loading && recetas.map((e) => (
             <Link to="/RecetasOutput" state={e} key={e.nom + e.fecha}>
               <OutputList>
                 -Nombre de plato: {e.nom}
@@ -37,6 +45,7 @@ const Recetas = () => {
             </Link>
           ))}
         </div>
+        {loading && <CardDiv>Cargando...</CardDiv>}
       </article>
     </main>
   );
